@@ -19,6 +19,8 @@ exports.up = function (knex) {
         .references('id')
         // must have inTable or else it would crash
         .inTable('species')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
     })
     .createTable('zoo_animals', tbl => {
       tbl.integer('zoo_id')
@@ -26,11 +28,15 @@ exports.up = function (knex) {
         .notNullable()
         .references('id')
         .inTable('zoos')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
       tbl.integer('animal_id')
         .unsigned()
         .notNullable()
         .references('id')
         .inTable('animals')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
       tbl.primary(['zoo_id', 'animal_id'])
     })
 };
